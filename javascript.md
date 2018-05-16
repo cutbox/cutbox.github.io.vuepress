@@ -19,8 +19,8 @@ CutBox will look for functions added to (`cutboxFunctions`).
 See bolow:
 
 ```javascript
-var joining = items => items.map(e => e )
-                            .join(items.length > 0 ? "\n" : "")
+var mapFn = items => items.map(e => e )
+var joinFn = items => items.join(items.length > 0 ? "\n" : "")
 
 // After function definitions...
 
@@ -28,24 +28,39 @@ var cutboxFunctions = [
   {
     name: "Join",
     key: "j", // Shortcut key
-    func: joining // You can use any function defined in .cutbox.js
+    map: mapFn 
   },
   {
     name: "Join spaced",
     key: "s",
-    func: i => i.join(" ") // You can define functions inline
+    join: join 
   },
 ]
 ```
 
 ## Defining functions
 
-CutBox expects your javascript functions to...
+CutBox accepts two types of function
+
+Maps and Joins.
+
+Maps will 
 
 - accept a single argument, an array of strings `[String]`
-- and return a string `-> String`
+- return an array of strings `-> [String]`
 
-Here's a simple example of such a function in Javascript ES6:
+Here's a simple example of a map function in Javascript ES6:
+
+```javascript
+var fn = items => items.map( e => `"${e}"` )
+```
+
+Joins will
+
+- accept a single argument, an array of strings `[String]`
+- return a string `-> String`
+
+Here's a simple example of a join function in Javascript ES6:
 
 ```javascript
 var fn = items => items.join()
